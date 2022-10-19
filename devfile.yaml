@@ -8,7 +8,7 @@ components:
       memoryLimit: 3Gi
 commands:
   - id: installCamel
-    apply:
+    exec:
       component: tools
       commandLine: "jbang app install camel@apache/camel"
 events:
