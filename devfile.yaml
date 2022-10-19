@@ -8,6 +8,9 @@ components:
       memoryLimit: 3Gi
 commands:
   - id: install-camel
-    exec:
+    apply:
     component: tools
     commandLine: jbang app install camel@apache/camel
+events:
+  postStart: 
+    - install-camel
