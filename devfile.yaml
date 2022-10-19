@@ -7,20 +7,10 @@ components:
       image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
       memoryLimit: 3Gi
 commands:
-  - id: addcamel
-    exec:
-      component: tools
-      commandLine: "jbang trust add -o --fresh --quiet https://raw.githubusercontent.com/apache/camel/camel-3.18.2/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java"
-  - id: warmup
-    exec:
-      component: tools
-      commandLine: "jbang -Dcamel.jbang.version=3.18.2 camel@apache/camel"
   - id: install
-    composite:
-      commands:
-        - addcamel
-        - warmup
-      parallel: false
+    exec:
+      component: tools
+      commandLine: "jbang trust add -o --fresh --quiet https://raw.githubusercontent.com/apache/camel/camel-3.18.2/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java && jbang -Dcamel.jbang.version=3.18.2 camel@apache/camel"
 events:
   postStart:
     - install
