@@ -6,4 +6,11 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
       memoryLimit: 3Gi
-
+commands:
+  - exec:
+      name: "installCamel"
+      component: "tools"
+      commandLine: "jbang app install camel@apache/camel"
+events:
+  postStart:
+    - "installCamel" 
