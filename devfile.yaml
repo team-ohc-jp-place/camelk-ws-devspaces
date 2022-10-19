@@ -9,8 +9,8 @@ components:
 commands:
   - id: install-camel
     apply:
-    component: tools
-    commandLine: jbang app install camel@apache/camel
+      component: tools
+      commandLine: jbang app install camel@apache/camel
 events:
   postStart: 
     - install-camel
