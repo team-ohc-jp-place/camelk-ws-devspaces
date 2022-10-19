@@ -1,8 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
   name: demo-porject
-attributes:
-  controller.devfile.io/storage-type: ephemeral
 components:
   - name: tools
     container:
