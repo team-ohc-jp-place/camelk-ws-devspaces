@@ -9,7 +9,6 @@ components:
 commands:
   - id: installCamel
     exec:
-      id: "installCamel"
       component: "tools"
       commandLine: "jbang app install camel@apache/camel"
 events:
