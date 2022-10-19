@@ -15,7 +15,7 @@ commands:
   - id: install
     exec:
       component: tools
-      commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://raw.githubusercontent.com/apache/camel/camel-3.18.2/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java && /home/user/.sdkman/candidates/jbang/current/bin/jbang -Dcamel.jbang.version=3.18.2 camel@apache/camel"
+      commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java && /home/user/.sdkman/candidates/jbang/current/bin/jbang -Dcamel.jbang.version=3.18.2 camel@apache/camel"
 events:
   postStart:
     - install
