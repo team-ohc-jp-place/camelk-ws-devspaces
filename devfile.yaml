@@ -9,11 +9,6 @@ components:
       memoryLimit: 3Gi
       cpuLimit: 1000m
       cpuRequest: 500m
-      env:
-        - name: KUBERNETES_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
 commands:
   - id: install
     exec:
