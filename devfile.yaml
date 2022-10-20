@@ -13,7 +13,8 @@ commands:
   - id: install
     exec:
       component: tools
-      commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java && /usr/local/bin/oc adm policy add-cluster-role-to-user admin -z $DEVWORKSPACE_ID-sa"
+#       commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java && /usr/local/bin/oc adm policy add-cluster-role-to-user admin -z $DEVWORKSPACE_ID-sa"
+      commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java"
 events:
   postStart:
     - install
