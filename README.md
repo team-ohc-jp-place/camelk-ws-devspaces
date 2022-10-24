@@ -10,7 +10,7 @@ This is a basic repo to demonstrate running Karavan in OpenShift Dev Spaces 3.1 
    `oc get route devspaces -o jsonpath={.spec.host} -n openshift-devspaces`
 5. You can then launch a new "dev space" using this GitHub repo :
 
-x
+
 ```
 DSURL=$(oc get route devspaces -o jsonpath={.spec.host} -n openshift-devspaces)
 echo "https://$DSURL/#https://github.com/mgubaidullin/devspaces-karavan.git"
