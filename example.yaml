@@ -1,0 +1,3 @@
+- route:
+    from:
+      uri: kamelet:azure-cosmosdb-source
