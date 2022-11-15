@@ -1,3 +1,0 @@
-- route:
-    from:
-      uri: kamelet:file-watch-source
