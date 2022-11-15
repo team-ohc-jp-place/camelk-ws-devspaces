@@ -1,0 +1,3 @@
+- route:
+    from:
+      uri: kamelet:aws-kinesis-source
