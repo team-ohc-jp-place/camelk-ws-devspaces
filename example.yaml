@@ -1,6 +1,3 @@
 - route:
     from:
-      uri: kamelet:aws-ddb-streams-source
-- route:
-    from:
-      uri: kamelet:aws-redshift-source
+      uri: kamelet:file-watch-source
