@@ -1,3 +1,6 @@
 - route:
     from:
-      uri: kamelet:bitcoin-source
+      uri: kamelet:aws-kinesis-source
+- route:
+    from:
+      uri: kamelet:beer-source
