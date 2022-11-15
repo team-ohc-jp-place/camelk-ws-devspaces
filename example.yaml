@@ -1,3 +1,3 @@
 - route:
     from:
-      uri: kamelet:azure-storage-blob-source
+      uri: kamelet:aws-ddb-streams-source
