@@ -1,4 +1,0 @@
-- route:
-    from:
-      uri: kamelet:bitcoin-source
-- rest: {}
