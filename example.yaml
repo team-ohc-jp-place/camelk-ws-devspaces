@@ -1,6 +1,4 @@
 - route:
     from:
-      uri: kamelet:beer-source
-- route:
-    from:
       uri: kamelet:bitcoin-source
+- rest: {}
