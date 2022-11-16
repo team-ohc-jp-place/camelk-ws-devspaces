@@ -1,0 +1,3 @@
+- route:
+    from:
+      uri: kamelet:aws-ddb-streams-source
