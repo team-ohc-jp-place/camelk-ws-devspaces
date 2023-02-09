@@ -1,0 +1,11 @@
+- route:
+    id: route-3968
+    from:
+      uri: kamelet:timer-source
+      id: from-002f
+      parameters:
+        message: hello
+      steps:
+        - log:
+            message: ${body}
+            id: log-ddf5
