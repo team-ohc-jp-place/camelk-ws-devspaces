@@ -10,20 +10,12 @@ components:
       cpuLimit: 1000m
       cpuRequest: 500m
 commands:
-  - id: jbang
-    exec:
-      component: tools
-      commandLine: "curl -Ls https://sh.jbang.dev | bash -s - app setup"
-  - id: camel
-    exec:
-      component: tools
-      commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java"
   - id: install
-    composite:
-      commands:
-        - jbang
-        - camel
-      parallel: false
+    exec:
+      component: tools
+      commandLine: |
+        curl -Ls https://sh.jbang.dev | bash -s - app setup && 
+        /home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
 events:
   postStart:
     - install
