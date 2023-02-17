@@ -19,6 +19,7 @@ commands:
       component: tools
       commandLine: "/home/user/.sdkman/candidates/jbang/current/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java"
 events:
-  postStart:
+  preStart:
     - jbang
+  postStart:
     - camel
