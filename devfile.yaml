@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8@sha256:b0dfd9e15d878785bea5cb33a82a014abbd08c839917e72a8cd629c84bf47f1e
+      image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
       memoryRequest: 1Gi
       memoryLimit: 3Gi
       cpuLimit: 1000m
