@@ -11,12 +11,12 @@ components:
       cpuLimit: 1000m
       cpuRequest: 500m
 commands:
-  - id: jbang
-    exec:
-      component: tools
-      commandLine: |
-        curl -Ls https://sh.jbang.dev | bash -s - app setup && 
-        /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
+  #- id: jbang
+  #  exec:
+  #    component: tools
+  #    commandLine: |
+  #      curl -Ls https://sh.jbang.dev | bash -s - app setup && 
+  #      /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
   - id: kamel
     exec:
       component: tools
@@ -24,5 +24,5 @@ commands:
         curl -L https://github.com/apache/camel-k/releases/download/v1.9.2/camel-k-client-1.9.2-linux-64bit.tar.gz | tar -C /usr/local/bin -xz && chmod +x /usr/local/bin/kamel
 events:
   postStart:
-    - jbang
+    #- jbang
     - kamel
