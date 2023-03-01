@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  name: demo-project
+  name: camelk-ws
 components:
   - name: tools
     container:
@@ -11,18 +11,12 @@ components:
       cpuLimit: 1000m
       cpuRequest: 500m
 commands:
-  #- id: jbang
-  #  exec:
-  #    component: tools
-  #    commandLine: |
-  #      curl -Ls https://sh.jbang.dev | bash -s - app setup && 
-  #      /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
-  - id: kamel
+  - id: install
     exec:
       component: tools
       commandLine: |
-        curl -L https://github.com/apache/camel-k/releases/download/v1.9.2/camel-k-client-1.9.2-linux-64bit.tar.gz | tar -C /usr/local/bin -xz && chmod +x /usr/local/bin/kamel
+        curl -Ls https://sh.jbang.dev | bash -s - app setup && 
+        /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
 events:
   postStart:
-    #- jbang
-    - kamel
+    - install
