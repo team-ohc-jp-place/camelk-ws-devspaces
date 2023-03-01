@@ -4,18 +4,25 @@ metadata:
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
+      #image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
+      image: registry.redhat.io/devspaces/udi-rhel8@sha256:b0dfd9e15d878785bea5cb33a82a014abbd08c839917e72a8cd629c84bf47f1e
       memoryRequest: 1Gi
       memoryLimit: 3Gi
       cpuLimit: 1000m
       cpuRequest: 500m
 commands:
-  - id: install
+  - id: jbang
     exec:
       component: tools
       commandLine: |
         curl -Ls https://sh.jbang.dev | bash -s - app setup && 
         /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
+  - id: kamel
+    exec:
+      component: tools
+      commandLine: |
+        curl -L https://github.com/apache/camel-k/releases/download/v1.9.2/camel-k-client-1.9.2-linux-64bit.tar.gz | tar -C /usr/local/bin -xz && chmod +x /usr/local/bin/kamel
 events:
   postStart:
-    - install
+    - jbang
+    - kamel
