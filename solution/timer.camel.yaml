@@ -1,0 +1,11 @@
+- route:
+    id: route-11d7
+    from:
+      uri: timer:Timer1
+      id: from-1160
+      parameters:
+        repeatCount: 5
+      steps:
+        - log:
+            message: Hello World! It's ${date:now:HH:mm:ss} now.
+            id: log-72ce
