@@ -7,5 +7,5 @@
         repeatCount: 5
       steps:
         - log:
-            message: Hello World! It's ${date:now:HH:mm:ss} now.
+            message: Hello World! It's ${date-with-timezone:now:JST:HH:mm:ss} now.
             id: log-72ce
