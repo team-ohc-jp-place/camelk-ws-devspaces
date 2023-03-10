@@ -1,0 +1,20 @@
+- route:
+    id: route-ecb0
+    from:
+      uri: timer:timer
+      id: from-c0a8
+      parameters:
+        repeatCount: 1
+      steps:
+        - to:
+            uri: direct:secondRoute
+            id: to-871d
+- route:
+    id: secondRoute
+    from:
+      uri: direct:secondRoute
+      id: from-d1b7
+      steps:
+        - log:
+            message: scoundRoute invoked
+            id: log-dc1f
