@@ -1,0 +1,28 @@
+- route:
+    id: route-6f20
+    from:
+      uri: file:data/input
+      id: from-6b45
+      steps:
+        - unmarshal:
+            id: unmarshal-bd46
+            csv:
+              id: csv-0ddf
+              delimiter: ','
+              useMaps: true
+        - marshal:
+            id: marshal-d34b
+            json:
+              id: json-c1b6
+              library: jackson
+        - split:
+            id: split-0aae
+            expression:
+              jsonpath:
+                expression: $
+                id: jsonpath-eb10
+            parallelProcessing: true
+            steps:
+              - log:
+                  message: ${body}
+                  id: log-cdf6
