@@ -1,6 +1,6 @@
 # OpenShift DevSpaces workspace in the Camel-K Workshop
 
-###　リポジトリの構成
+##　リポジトリの構成
 
 .<br>
 ├── **.vscode** : VSCODE extention の recommendations設定<br>
@@ -9,7 +9,7 @@
 ├── devfile.yaml : OpenShift DevSpaces の 設定ファイル<br>
 └── example.camel.yaml : Camel K の サンプルファイル
 
-###　Camel-K Workshop
+##　Camel-K Workshop
 
 https://github.com/team-ohc-jp-place/camelk-ws
 
