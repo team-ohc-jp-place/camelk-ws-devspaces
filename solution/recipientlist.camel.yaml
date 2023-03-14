@@ -1,0 +1,43 @@
+- route:
+    id: route-73a0
+    from:
+      uri: file:data/input
+      id: from-378b
+      steps:
+        - recipientList:
+            id: recipientList-a202
+            expression:
+              simple:
+                expression: ${bodyAs(String)}
+                id: simple-a3e1
+            delimiter: ;
+- route:
+    id: route-0e02
+    from:
+      uri: direct:a
+      id: from-12f3
+      description: direct:a
+      steps:
+        - log:
+            message: direct:a invoked
+            id: log-dd0f
+- route:
+    id: route-66d8
+    from:
+      uri: direct:b
+      id: from-5fa0
+      description: direct:b
+      steps:
+        - log:
+            message: direct:b invoked
+            id: log-6e96
+- route:
+    id: route-8101
+    from:
+      uri: direct:c
+      id: from-76eb
+      description: direct:c
+      steps:
+        - log:
+            message: direct:c invoked
+            id: log-004a
