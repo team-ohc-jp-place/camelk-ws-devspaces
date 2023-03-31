@@ -1,0 +1,141 @@
+- rest:
+    id: rest-9655
+    delete:
+      - id: delete
+        param:
+          - name: name
+            type: path
+            dataType: string
+            description: Name of the object
+            required: true
+        path: /v1/{name}
+        to: direct:delete
+    get:
+      - id: list
+        path: /v1
+        produces: application/json
+        to: direct:list
+      - id: get
+        param:
+          - name: name
+            type: path
+            dataType: string
+            description: Name of the object
+            required: true
+        path: /v1/{name}
+        produces: application/octet-stream
+        to: direct:get
+    put:
+      - id: create
+        param:
+          - name: name
+            type: path
+            dataType: string
+            description: Name of the object
+            required: true
+          - name: body
+            type: body
+            description: The object content
+            required: true
+        path: /v1/{name}
+        consumes: application/octet-stream
+        to: direct:create
+- route:
+    id: route-cb1c
+    from:
+      uri: direct:list
+      id: from-fa5a
+      steps:
+        - to:
+            uri: aws2-s3://{{api.bucket}}
+            id: to-bedd
+            parameters:
+              operation: listObjects
+        - split:
+            id: split-b5d4
+            expression:
+              simple:
+                expression: ${body}
+                id: simple-a8cd
+            aggregationStrategyMethodAllowNull: true
+            aggregationStrategy: >-
+              #class:org.apache.camel.processor.aggregate.GroupedBodyAggregationStrategy
+            parallelProcessing: true
+            streaming: true
+            steps:
+              - transform:
+                  id: transform-4007
+                  expression:
+                    simple:
+                      expression: ${body.key}
+                      id: simple-6089
+        - marshal:
+            id: marshal-34b8
+            json:
+              id: json-36ae
+              library: jackson
+- route:
+    id: route-d6ed
+    from:
+      uri: direct:get
+      id: from-a052
+      description: GET
+      steps:
+        - setHeader:
+            name: CamelAwsS3Key
+            id: setHeader-6811
+            expression:
+              simple:
+                expression: ${header.name}
+                id: simple-c9a1
+        - to:
+            uri: aws2-s3://{{api.bucket}}
+            id: to-bb47
+            parameters:
+              operation: getObject
+- route:
+    id: route-a98c
+    from:
+      uri: direct:delete
+      id: from-00bb
+      description: DELETE
+      steps:
+        - setHeader:
+            name: CamelAwsS3Key
+            id: setHeader-2919
+            expression:
+              simple:
+                expression: ${header.name}
+                id: simple-113d
+        - to:
+            uri: aws2-s3://{{api.bucket}}
+            id: to-928e
+            parameters:
+              operation: deleteObject
+        - setBody:
+            id: setBody-4b9f
+            expression:
+              constant:
+                id: constant-0904
+- route:
+    id: route-66f1
+    from:
+      uri: direct:create
+      id: from-b46f
+      description: CREATE
+      steps:
+        - setHeader:
+            name: CamelAwsS3Key
+            id: setHeader-b4c2
+            expression:
+              simple:
+                expression: ${header.name}
+                id: simple-230c
+        - to:
+            uri: aws2-s3://{{api.bucket}}
+            id: to-c519
+        - setBody:
+            id: setBody-5c7d
+            expression:
+              constant:
+                id: constant-4741
