@@ -1,19 +1,24 @@
 - route:
-    id: route-b9aa
+    id: route-b00a
     from:
-      uri: kamelet:kafka-not-secured-source
-      id: from-d78b
+      uri: kamelet:kafka-source
+      id: from-d8c9
       parameters:
         topic: incoming-topic
         bootstrapServers: kafka-cluster-kafka-bootstrap.user1-dev.svc:9092
-        autoOffsetReset: latest
+        securityProtocol: PLAINTEXT
+        user: demo
+        password: demo
       steps:
         - log:
             message: ${body}
-            id: log-843a
+            id: log-4b8f
         - to:
-            uri: kamelet:kafka-not-secured-sink
-            id: to-4e57
+            uri: kamelet:kafka-sink
+            id: to-ac1d
             parameters:
               topic: outcoming-topic
               bootstrapServers: kafka-cluster-kafka-bootstrap.user1-dev.svc:9092
+              securityProtocol: PLAINTEXT
+              user: demo
+              password: demo

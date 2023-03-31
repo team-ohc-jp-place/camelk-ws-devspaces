@@ -1,0 +1,42 @@
+- route:
+    id: route-6036
+    from:
+      uri: timer:timer1
+      id: from-b838
+      parameters:
+        repeatCount: 1
+      steps:
+        - setBody:
+            id: setBody-57ce
+            expression:
+              simple:
+                expression: '{"id":4, "name":"melon"}'
+                id: simple-9892
+        - to:
+            uri: kamelet:postgresql-sink
+            id: to-4b54
+            parameters:
+              serverName: postgresql.user1-dev.svc.cluster.local
+              serverPort: '5432'
+              username: demo
+              password: demo
+              query: insert into products (id, name) values (:#id, :#name)
+              databaseName: sampledb
+        - marshal:
+            id: marshal-f2bf
+            json:
+              id: json-2bb5
+              library: jackson
+        - to:
+            uri: kamelet:postgresql-sink
+            id: to-3db1
+            parameters:
+              serverName: postgresql.user1-dev.svc.cluster.local
+              serverPort: '5432'
+              username: demo
+              password: demo
+              query: select * from products
+              databaseName: sampledb
+        - log:
+            message: ${body}
+            id: log-694a
