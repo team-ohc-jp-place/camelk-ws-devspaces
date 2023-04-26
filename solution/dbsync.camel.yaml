@@ -1,0 +1,113 @@
+- route:
+    id: route-b00a
+    from:
+      uri: kamelet:kafka-source
+      id: from-d8c9
+      parameters:
+        topic: debezium.public.products
+        bootstrapServers: kafka-cluster-kafka-bootstrap.user1-dev.svc:9092
+        securityProtocol: PLAINTEXT
+        user: demo
+        password: demo
+        autoOffsetReset: earliest
+      steps:
+        - to:
+            uri: atlasmap:file:atlasmap-mapping.adm
+            id: to-4fff
+        - choice:
+            when:
+              - id: when-f008
+                expression:
+                  simple:
+                    expression: ${body.contains("op":"u")}
+                    id: simple-5b6b
+                steps:
+                  - log:
+                      message: 'UPDATE: ${body}'
+                      id: log-3a7c
+                  - to:
+                      uri: direct:update
+                      id: to-1f83
+              - id: when-d070
+                expression:
+                  simple:
+                    expression: ${body.contains("op":"c")}
+                    id: simple-1ae1
+                steps:
+                  - log:
+                      message: 'CREATE: ${body}'
+                      id: log-708f
+                  - to:
+                      uri: direct:create
+                      id: to-85e0
+                      description: CREATE
+              - id: when-21ed
+                expression:
+                  simple:
+                    expression: ${body.contains("op":"d")}
+                    id: simple-f4db
+                steps:
+                  - log:
+                      message: 'DELETE: ${body}'
+                      id: log-5a06
+                  - to:
+                      uri: direct:delete
+                      id: to-9c00
+            id: choice-2d15
+            otherwise:
+              id: otherwise-e045
+              steps:
+                - log:
+                    message: '"Otherwise"'
+                    id: log-90ef
+- route:
+    id: update
+    from:
+      uri: direct:update
+      id: from-5d80
+      description: UPDATE
+      steps:
+        - to:
+            uri: kamelet:postgresql-sink
+            id: to-ba63
+            parameters:
+              serverName: postgresql-replica.user1-dev.svc.cluster.local
+              serverPort: '5432'
+              username: demo
+              password: demo
+              query: UPDATE products SET name=:#name where id=:#id
+              databaseName: sampledb
+- route:
+    id: create
+    from:
+      uri: direct:create
+      id: from-cc50
+      description: CREATE
+      steps:
+        - to:
+            uri: kamelet:postgresql-sink
+            id: to-d8bb
+            parameters:
+              serverName: postgresql-replica.user1-dev.svc.cluster.local
+              serverPort: '5432'
+              username: demo
+              password: demo
+              databaseName: sampledb
+              query: INSERT INTO products (id, name) VALUES (:#id, :#name)
+- route:
+    id: delete
+    from:
+      uri: direct:delete
+      id: from-ca87
+      description: DELETE
+      steps:
+        - to:
+            uri: kamelet:postgresql-sink
+            id: to-0db8
+            parameters:
+              serverName: postgresql-replica.user1-dev.svc.cluster.local
+              serverPort: '5432'
+              username: demo
+              password: demo
+              databaseName: sampledb
+              query: DELETE from products where id=:#id
