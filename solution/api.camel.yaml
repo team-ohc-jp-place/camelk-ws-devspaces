@@ -45,6 +45,7 @@
     from:
       uri: direct:list
       id: from-fa5a
+      description: GET LIST
       steps:
         - to:
             uri: aws2-s3://{{api.bucket}}
