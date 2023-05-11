@@ -16,5 +16,5 @@
       id: from-d1b7
       steps:
         - log:
-            message: scoundRoute invoked
+            message: secoundRoute invoked
             id: log-dc1f
