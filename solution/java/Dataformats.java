@@ -1,6 +1,6 @@
 // camel-k: language=java
 // camel-k: dependency=camel-csv
-// camel-k: camel-jackson
+// camel-k: dependency=camel-jackson
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.csv.CsvDataFormat;

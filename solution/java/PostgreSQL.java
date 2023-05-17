@@ -1,6 +1,6 @@
 // camel-k: language=java
-// camel-k: camel-jackson
-// camel-k: camel-kamelet
+// camel-k: dependency=camel-jackson
+// camel-k: dependency=camel-kamelet
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
