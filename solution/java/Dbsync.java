@@ -2,7 +2,7 @@
 
 import org.apache.camel.builder.RouteBuilder;
 
-public class Direct extends RouteBuilder {
+public class Dbsync extends RouteBuilder {
   @Override
   public void configure() throws Exception {
 
