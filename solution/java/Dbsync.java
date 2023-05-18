@@ -34,7 +34,7 @@ public class Dbsync extends RouteBuilder {
                 + "databaseName=sampledb&" 
                 + "query=DELETE from products where id=:#id")
         .otherwise()
-            .log("Otherwise")
+            .log("CREATE: ${body}")
             .to("kamelet:postgresql-sink?" 
                 + "serverName=postgresql-replica.user1-dev.svc.cluster.local&" 
                 + "serverPort=5432&" 
