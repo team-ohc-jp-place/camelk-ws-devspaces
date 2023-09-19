@@ -11,24 +11,32 @@
         password: demo
         autoOffsetReset: earliest
       steps:
-        - to:
-            uri: atlasmap:file:/etc/camel/resources/atlasmap-mapping.adm
-            id: to-4fff
+        - setBody:
+            id: setBody-e7fa
+            expression:
+              jsonpath:
+                expression: $.payload
+                id: jsonpath-ea65
         - choice:
             when:
-              - id: when-f008
+              - id: when-308c
                 expression:
                   simple:
-                    expression: ${body.contains("op":"u")}
-                    id: simple-5b6b
-                description: 'When: UPDATE'
+                    expression: ${body['__op']} == 'u'
+                    id: simple-2b7c
+                description: Update
                 steps:
                   - log:
-                      message: 'UPDATE: ${body}'
-                      id: log-3a7c
+                      message: 'Update: ${body}'
+                      id: log-3442
+                  - marshal:
+                      id: marshal-3ec8
+                      json:
+                        id: json-fb7d
+                        library: jackson
                   - to:
                       uri: kamelet:postgresql-sink
-                      id: to-ba63
+                      id: to-7996
                       parameters:
                         serverName: postgresql-replica.user1-dev.svc.cluster.local
                         serverPort: '5432'
@@ -36,41 +44,61 @@
                         password: demo
                         query: UPDATE products SET name=:#name where id=:#id
                         databaseName: sampledb
-              - id: when-21ed
+              - id: when-9326
                 expression:
                   simple:
-                    expression: ${body.contains("op":"d")}
-                    id: simple-f4db
-                description: 'When: DELETE'
+                    expression: ${body['__op']} == 'd'
+                    id: simple-2358
+                description: Delete
                 steps:
                   - log:
-                      message: 'DELETE: ${body}'
-                      id: log-5a06
+                      message: 'Delete: ${body}'
+                      id: log-f3c6
+                  - marshal:
+                      id: marshal-997d
+                      json:
+                        id: json-5382
+                        library: jackson
                   - to:
                       uri: kamelet:postgresql-sink
-                      id: to-0db8
+                      id: to-6ead
                       parameters:
                         serverName: postgresql-replica.user1-dev.svc.cluster.local
                         serverPort: '5432'
                         username: demo
                         password: demo
-                        databaseName: sampledb
                         query: DELETE from products where id=:#id
-            id: choice-2d15
+                        databaseName: sampledb
+              - id: when-8a3d
+                expression:
+                  simple:
+                    expression: ${body['__op']} == 'c' || ${body['__op']} == 'r'
+                    id: simple-b245
+                description: Create
+                steps:
+                  - log:
+                      message: 'Create: ${body}'
+                      id: log-e492
+                  - marshal:
+                      id: marshal-f1bb
+                      json:
+                        id: json-f6c7
+                        library: jackson
+                  - to:
+                      uri: kamelet:postgresql-sink
+                      id: to-e972
+                      parameters:
+                        serverName: postgresql-replica.user1-dev.svc.cluster.local
+                        serverPort: '5432'
+                        username: demo
+                        password: demo
+                        query: INSERT INTO products (id, name) VALUES (:#id, :#name)
+                        databaseName: sampledb
+            id: choice-af40
             otherwise:
-              id: otherwise-e045
-              description: 'Otherwise: CREATE'
+              id: otherwise-8f09
+              description: Others
               steps:
                 - log:
-                    message: '"Otherwise"'
-                    id: log-90ef
-                - to:
-                    uri: kamelet:postgresql-sink
-                    id: to-d8bb
-                    parameters:
-                      serverName: postgresql-replica.user1-dev.svc.cluster.local
-                      serverPort: '5432'
-                      username: demo
-                      password: demo
-                      databaseName: sampledb
-                      query: INSERT INTO products (id, name) VALUES (:#id, :#name)
+                    message: 'Other: ${body}'
+                    id: log-8abd
