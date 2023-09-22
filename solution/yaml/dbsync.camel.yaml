@@ -69,36 +69,26 @@
                         password: demo
                         query: DELETE from products where id=:#id
                         databaseName: sampledb
-              - id: when-8a3d
-                expression:
-                  simple:
-                    expression: ${body['__op']} == 'c' || ${body['__op']} == 'r'
-                    id: simple-b245
-                description: Create
-                steps:
-                  - log:
-                      message: 'Create: ${body}'
-                      id: log-e492
-                  - marshal:
-                      id: marshal-f1bb
-                      json:
-                        id: json-f6c7
-                        library: jackson
-                  - to:
-                      uri: kamelet:postgresql-sink
-                      id: to-e972
-                      parameters:
-                        serverName: postgresql-replica.user1-dev.svc.cluster.local
-                        serverPort: '5432'
-                        username: demo
-                        password: demo
-                        query: INSERT INTO products (id, name) VALUES (:#id, :#name)
-                        databaseName: sampledb
             id: choice-af40
             otherwise:
               id: otherwise-8f09
-              description: Others
+              description: Create
               steps:
                 - log:
-                    message: 'Other: ${body}'
+                    message: 'Create: ${body}'
                     id: log-8abd
+                - marshal:
+                    id: marshal-f1bb
+                    json:
+                      id: json-f6c7
+                      library: jackson
+                - to:
+                    uri: kamelet:postgresql-sink
+                    id: to-e972
+                    parameters:
+                      serverName: postgresql-replica.user1-dev.svc.cluster.local
+                      serverPort: '5432'
+                      username: demo
+                      password: demo
+                      query: INSERT INTO products (id, name) VALUES (:#id, :#name)
+                      databaseName: sampledb
