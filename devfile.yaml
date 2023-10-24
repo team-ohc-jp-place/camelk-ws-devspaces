@@ -6,10 +6,10 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
       #image: registry.redhat.io/devspaces/udi-rhel8@sha256:b0dfd9e15d878785bea5cb33a82a014abbd08c839917e72a8cd629c84bf47f1e
-      #memoryRequest: 1Gi
-      #memoryLimit: 3Gi
-      #cpuLimit: 1000m
-      #cpuRequest: 500m
+      memoryRequest: 2Gi
+      memoryLimit: 6Gi
+      cpuLimit: 2000m
+      cpuRequest: 1000m
 commands:
   - id: install
     exec:
