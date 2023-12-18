@@ -22,11 +22,8 @@ commands:
       component: tools
       commandLine: |
         jbang app install camel@apache/camel
-  - id: install
-    composite:
-      commands:
-        - install-jbang
-        - install-camel-jbang
 events:
   postStart:
-    - install
+    - install-jbang
+    - install-camel-jbang
+
