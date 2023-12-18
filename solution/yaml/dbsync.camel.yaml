@@ -12,18 +12,18 @@
         autoOffsetReset: earliest
       steps:
         - setBody:
-            id: setBody-e7fa
             expression:
               jsonpath:
                 expression: $.payload
                 id: jsonpath-ea65
+            id: setBody-e7fa
         - choice:
             when:
-              - id: when-308c
-                expression:
+              - expression:
                   simple:
                     expression: ${body['__op']} == 'u'
                     id: simple-2b7c
+                id: when-308c
                 description: Update
                 steps:
                   - log:
@@ -32,8 +32,8 @@
                   - marshal:
                       id: marshal-3ec8
                       json:
-                        id: json-fb7d
                         library: jackson
+                        id: json-fb7d
                   - to:
                       uri: kamelet:postgresql-sink
                       id: to-7996
@@ -44,11 +44,11 @@
                         password: demo
                         query: UPDATE products SET name=:#name where id=:#id
                         databaseName: sampledb
-              - id: when-9326
-                expression:
+              - expression:
                   simple:
                     expression: ${body['__op']} == 'd'
                     id: simple-2358
+                id: when-9326
                 description: Delete
                 steps:
                   - log:
@@ -57,8 +57,8 @@
                   - marshal:
                       id: marshal-997d
                       json:
-                        id: json-5382
                         library: jackson
+                        id: json-5382
                   - to:
                       uri: kamelet:postgresql-sink
                       id: to-6ead
@@ -69,7 +69,6 @@
                         password: demo
                         query: DELETE from products where id=:#id
                         databaseName: sampledb
-            id: choice-af40
             otherwise:
               id: otherwise-8f09
               description: Create
@@ -80,8 +79,8 @@
                 - marshal:
                     id: marshal-f1bb
                     json:
-                      id: json-f6c7
                       library: jackson
+                      id: json-f6c7
                 - to:
                     uri: kamelet:postgresql-sink
                     id: to-e972
@@ -92,3 +91,4 @@
                       password: demo
                       query: INSERT INTO products (id, name) VALUES (:#id, :#name)
                       databaseName: sampledb
+            id: choice-af40
