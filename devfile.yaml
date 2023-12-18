@@ -17,13 +17,7 @@ commands:
       commandLine: |
         curl -Ls https://sh.jbang.dev | bash -s - app setup && 
         /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
-  - id: install-camel-jbang
-    exec:
-      component: tools
-      commandLine: |
-        jbang app install camel@apache/camel
 events:
   postStart:
     - install-jbang
-    - install-camel-jbang
 
