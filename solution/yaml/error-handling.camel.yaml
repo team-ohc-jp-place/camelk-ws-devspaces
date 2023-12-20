@@ -1,0 +1,33 @@
+- route:
+    nodePrefixId: route-d4c
+    routeConfigurationId: dummyError
+    id: route-1781
+    from:
+      uri: rest
+      id: from-ae61
+      parameters:
+        method: get
+        path: dummy
+      steps:
+        - throwException:
+            message: dummy error occurred!
+            exceptionType: java.lang.Exception
+            id: throwException-2464
+- routeConfiguration:
+    onException:
+      - onException:
+          exception:
+            - java.lang.Exception
+          handled:
+            constant:
+              expression: 'true'
+              id: constant-b091
+          id: onException-ec38
+          steps:
+            - setBody:
+                expression:
+                  simple:
+                    expression: ${exception.stacktrace}
+                    id: simple-6938
+                id: setBody-91dd
+    id: dummyError
