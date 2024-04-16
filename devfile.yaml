@@ -10,6 +10,9 @@ components:
       memoryLimit: 6Gi
       cpuLimit: 2000m
       cpuRequest: 1000m
+      env:
+        - name: KUBEDOCK_ENABLED
+          value: "true"
 commands:
   - id: setup-trust
     exec:
