@@ -10,14 +10,6 @@ components:
       memoryLimit: 6Gi
       cpuLimit: 2000m
       cpuRequest: 1000m
-      env:
-        - name: KUBEDOCK_ENABLED
-          value: "true"
-        - name: JAVA_HOME_TEST
-          value: /home/tooling/.sdkman/candidates/java/17.0.3-tem
-      volumeMounts:
-        - name: m2
-          path: /home/user/.m2
 commands:
   - id: setup-trust
     exec:
@@ -27,8 +19,8 @@ commands:
     exec:
       component: tools
       commandLine: "jbang app install camel@apache/camel --verbose && echo 'Camel installed' && source ~/.bashrc"
-events:
-  postStart:
-    - setup-trust
-    - install-camel-jbang
+#events:
+#  postStart:
+#    - setup-trust
+#    - install-camel-jbang
 
