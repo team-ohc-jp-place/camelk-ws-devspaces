@@ -14,8 +14,7 @@ commands:
   - id: install-camel-jbang
     exec:
       component: tools
-      commandLine: |
-        jbang app install camel@apache/camel
+      commandLine: "jbang app install camel@apache/camel"
 events:
   postStart:
     - install-camel-jbang
