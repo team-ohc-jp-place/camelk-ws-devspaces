@@ -10,17 +10,3 @@ components:
       memoryLimit: 6Gi
       cpuLimit: 2000m
       cpuRequest: 1000m
-commands:
-  - id: setup-trust
-    exec:
-      component: tools
-      commandLine: "jbang trust add https://github.com/apache/camel/ --verbose && echo 'Trust setup completed'"
-  - id: install-camel-jbang
-    exec:
-      component: tools
-      commandLine: "jbang app install camel@apache/camel --verbose && echo 'Camel installed' && source ~/.bashrc"
-#events:
-#  postStart:
-#    - setup-trust
-#    - install-camel-jbang
-
