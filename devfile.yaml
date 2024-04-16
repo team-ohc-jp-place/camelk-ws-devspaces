@@ -19,8 +19,8 @@ commands:
     exec:
       component: tools
       commandLine: "jbang app install camel@apache/camel"
-events:
-  postStart:
-    - setup-trust
-    - install-camel-jbang
+#events:
+#  postStart:
+#    - setup-trust
+#    - install-camel-jbang
 
