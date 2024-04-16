@@ -1,23 +1,23 @@
-schemaVersion: 2.1.0
+schemaVersion: 2.2.0
 metadata:
   name: camelk-ws
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-f5ffca8
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
       #image: registry.redhat.io/devspaces/udi-rhel8@sha256:b0dfd9e15d878785bea5cb33a82a014abbd08c839917e72a8cd629c84bf47f1e
       memoryRequest: 2Gi
       memoryLimit: 6Gi
       cpuLimit: 2000m
       cpuRequest: 1000m
-commands:
-  - id: install-jbang
-    exec:
-      component: tools
-      commandLine: |
-        curl -Ls https://sh.jbang.dev | bash -s - app setup && 
-        /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
-events:
-  postStart:
-    - install-jbang
+#commands:
+#  - id: install-jbang
+#    exec:
+#      component: tools
+#      commandLine: |
+#        curl -Ls https://sh.jbang.dev | bash -s - app setup && 
+#        /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
+#events:
+#  postStart:
+#    - install-jbang
 
