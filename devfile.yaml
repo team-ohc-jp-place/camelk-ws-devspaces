@@ -13,6 +13,11 @@ components:
       env:
         - name: KUBEDOCK_ENABLED
           value: "true"
+        - name: JAVA_HOME_TEST
+          value: /home/tooling/.sdkman/candidates/java/17.0.3-tem
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
 commands:
   - id: setup-trust
     exec:
