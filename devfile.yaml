@@ -10,14 +10,13 @@ components:
       memoryLimit: 6Gi
       cpuLimit: 2000m
       cpuRequest: 1000m
-#commands:
-#  - id: install-jbang
-#    exec:
-#      component: tools
-#      commandLine: |
-#        curl -Ls https://sh.jbang.dev | bash -s - app setup && 
-#        /home/user/.jbang/bin/jbang trust add -o --fresh --quiet https://github.com/apache/camel/blob/HEAD/dsl/camel-jbang/camel-jbang-main/dist/CamelJBang.java
-#events:
-#  postStart:
-#    - install-jbang
+commands:
+  - id: install-camel-jbang
+    exec:
+      component: tools
+      commandLine: |
+        jbang app install camel@apache/camel
+events:
+  postStart:
+    - install-camel-jbang
 
