@@ -1,6 +1,6 @@
 {  
   "recommendations": [
-    "camel-karavan.karavan",
+    "redhat.vscode-kaoto",
     "redhat.java"
   ]  
 }
