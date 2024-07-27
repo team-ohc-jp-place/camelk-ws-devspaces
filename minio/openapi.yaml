@@ -23,7 +23,9 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                type: string
           description: The object content
       operationId: get
       summary: Get the content of an object
@@ -31,10 +33,16 @@ paths:
       requestBody:
         description: The object content
         content:
-          application/octet-stream: {}
+            application/octet-stream:
+              schema:
+                type: string
         required: true
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                type: string
           description: The object has been created
       operationId: create
       summary: Save an object
