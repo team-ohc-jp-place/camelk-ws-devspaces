@@ -1,7 +1,5 @@
 {  
   "recommendations": [
-    "redhat.vscode-kaoto",
-    "redhat.java",
     "redhat.apache-camel-extension-pack"
   ]  
 }
