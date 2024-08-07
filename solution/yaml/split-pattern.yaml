@@ -1,0 +1,28 @@
+- route:
+    id: route-2368
+    from:
+      uri: timer:split-pattern
+      parameters:
+        period: "1000"
+        repeatCount: "1"
+      steps:
+        - setBody:
+            expression:
+              simple:
+                expression: |-
+                  id,name
+                  1,apple
+                  2,orange
+                  3,lemon
+        - unmarshal:
+            csv:
+              delimiter: ","
+              useMaps: true
+        - split:
+            id: split-3435
+            expression:
+              simple:
+                expression: ${body}
+            parallelProcessing: true
+        - log:
+            message: ${body}
