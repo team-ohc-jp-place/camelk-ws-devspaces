@@ -10,3 +10,12 @@ components:
       memoryLimit: 6Gi
       cpuLimit: 2000m
       cpuRequest: 1000m
+events:
+  postStart:
+    - set-camel-cli
+commands:
+  - id: set-camel-cli
+    exec:
+      # commandLine: source ~/.bashrc && jbang app install camel@apache/camel
+      commandLine: 'source ~/.bashrc && jbang trust add https://github.com/apache/camel/ && jbang app install camel@apache/camel'
+      component: tools
