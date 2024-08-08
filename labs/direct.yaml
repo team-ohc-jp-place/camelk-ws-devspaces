@@ -1,0 +1,12 @@
+- route:
+    id: First-Route
+    from:
+      id: from-2308
+      uri: timer:direct
+      parameters:
+        period: "1000"
+        repeatCount: "1"
+      steps:
+        - log:
+            id: log-2900
+            message: ${body}

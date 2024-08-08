@@ -1,0 +1,34 @@
+- route:
+    id: main
+    from:
+      uri: timer:recipientlist
+      parameters:
+        repeatCount: "1"
+      steps:
+        - log:
+            message: ${body}
+- route:
+    id: route-a
+    from:
+      uri: direct:route-a
+      steps:
+        - log:
+            message: route-a invoked
+- route:
+    id: route-b
+    from:
+      uri: direct:route-b
+      steps:
+        - log:
+            message: route-b invoked
+- route:
+    id: route-c
+    from:
+      uri: direct:route-c
+      steps:
+        - log:
+            message: route-c invoked
+
+
+
+

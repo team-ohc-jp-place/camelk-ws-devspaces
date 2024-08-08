@@ -1,0 +1,51 @@
+- route:
+    id: main
+    from:
+      id: from-4289
+      uri: timer:recipientlist
+      parameters:
+        period: "1000"
+        repeatCount: "1"
+      steps:
+        - setHeader:
+            id: setHeader-8167
+            expression:
+              constant:
+                expression: direct:route-a;direct:route-c
+            name: destination
+        - recipientList:
+            id: recipientList-9424
+            delimiter: ;
+            expression:
+              header:
+                expression: destination
+- route:
+    id: route-a
+    from:
+      id: from-4129
+      uri: direct:route-a
+      parameters: {}
+      steps:
+        - log:
+            id: log-2709
+            message: route-a invoked
+- route:
+    id: route-b
+    from:
+      id: from-4081
+      uri: direct:route-b
+      parameters: {}
+      steps:
+        - log:
+            id: log-1162
+            message: route-b invoked
+- route:
+    id: route-c
+    from:
+      id: from-1449
+      uri: direct:route-c
+      parameters: {}
+      steps:
+        - log:
+            id: log-8774
+            message: route-c invoked
