@@ -14,6 +14,10 @@ events:
   postStart:
     - set-camel-cli
 commands:
+  - id: set-java-17
+    exec:
+      commandLine: source ~/.bashrc && sdk default java 17.0.3-tem
+      component: tools
   - id: set-camel-cli
     exec:
       # commandLine: source ~/.bashrc && jbang app install camel@apache/camel
