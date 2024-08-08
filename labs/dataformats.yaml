@@ -13,11 +13,5 @@
                   1,apple
                   2,orange
                   3,lemon
-        - unmarshal:
-            csv:
-              delimiter: ","
-              useMaps: true
-        - marshal:
-            json: {}
         - log:
             message: ${body}
