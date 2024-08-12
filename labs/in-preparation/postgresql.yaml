@@ -1,0 +1,23 @@
+- route:
+    id: route-1397
+    from:
+      id: from-1538
+      uri: timer:template
+      parameters:
+        period: "1000"
+        repeatCount: "1"
+      steps:
+        - log:
+            id: log-8372
+            message: ${body}
+- beans:
+    - name: dsBean
+      properties:
+        driverClassName: org.postgresql.Driver
+        password: demo
+        url: jdbc:postgresql://postgresql.user1-dev.svc.cluster.local:5432/sampledb
+        username: demo
+      type: "#class:org.apache.commons.dbcp2.BasicDataSource"
+
+
+
